@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pl.mybatis.test.repository.TestInfoRepository">
+
+  <resultMap id="TestInfo" type="pl.mybatis.test.dto.TestInfo">
+    <result column="test_value" jdbcType="VARCHAR" property="testValue" />
+    <result column="test_date" jdbcType="DATE" property="testDate" />
+  </resultMap>
+
+
+  <select id="findRecord" resultMap="TestInfo">
+    SELECT test_value,
+           test_date
+    FROM TEST_INFO
+    WHERE test_value = #{testValue}
+    <if test="myDateFrom != null and myDateTo != null and myDateFrom.compareTo(myDateTo) != 0">
+      AND test_date BETWEEN  #{myDateFrom}  AND  #{myDateTo}
+    </if>
+  </select>
+
+</mapper>
