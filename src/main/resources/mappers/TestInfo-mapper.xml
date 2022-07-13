@@ -15,7 +15,7 @@
            test_date
     FROM TEST_INFO
     WHERE test_value = #{testValue}
-    <if test="myDateFrom != null and myDateTo != null and myDateFrom.compareTo(myDateTo) != 0">
+    <if test="myDateFrom != null and myDateTo != null and myDateTo != myDateFrom">
       AND test_date BETWEEN  #{myDateFrom}  AND  #{myDateTo}
     </if>
   </select>
